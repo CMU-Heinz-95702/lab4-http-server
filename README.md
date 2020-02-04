@@ -53,20 +53,20 @@ Your HTTP server should be able to handle multiple requests, one-at-a-time. You 
 
 * Create a socket
 * Loop forever...
- * accept a socket connection
- * read the first line of the HTTP request
- * parse out the file path requested<br>
+  * accept a socket connection
+  * read the first line of the HTTP request
+  * parse out the file path requested<br>
    :checkered_flag: **(CHECKPOINT: print the file path to the console.)**
- * read but discard the rest of the request headers so that the next line available to read will be the next HTTP request, not the remainder of the prior header
+  * read but discard the rest of the request headers so that the next line available to read will be the next HTTP request, not the remainder of the prior header
   * try to open the file requested on your local disk
   * if successful
-   * reply with OK status response header
+    * reply with OK status response header
     * reply with blank line to indicate end of headers
     * while more lines of the file remain...
-     * read a line of the file
-     * write to the socket
+      * read a line of the file
+      * write to the socket
   * else
-    * report file not found using the correct HTTP status code
+     * report file not found using the correct HTTP status code
   * flush the socket
   * close the socket
 
