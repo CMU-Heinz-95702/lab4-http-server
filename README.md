@@ -82,7 +82,8 @@ Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)  ...
 Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8
-Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3```
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+```
 
  * A blank line delimits the end of the HTTP request
  * So your HTTP Server program must read the first line from the TCP socket, parse out the *resource identifier* (e.g. /test.html) and then try to read that file (e.g. test.html) from your local file system (see TEST HTML FILES below).
