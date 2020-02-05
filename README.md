@@ -1,6 +1,6 @@
 # Lab 4 - HTTP Server Lab
 
-This lab builds on the networking and HTTP lectures and videos and gives you experience working with a transport layer protocol (TCP) and implementing  basic elements of an application layer protocol (HTTP).
+This lab builds on the networking and HTTP lectures and videos and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
 
 You should first view the [13 minute video](http://heinzcollege.mediasite.com/Mediasite/Play/21d1939d54f04444b042e45fc923742e1d)
  that explains TCP and UDP sockets and introduces the task for this lab.
@@ -71,9 +71,10 @@ Your HTTP server should be able to handle multiple requests, one-at-a-time. You 
   * close the socket
 
 **HINTS:**
-* **HTTP Request:**
- * You should review the Server Side Programming slides from week 3 to review the format of simple HTTP requests.
- * E.g. In Chrome, here is an HTTP request header of http://localhost:3000/test.html
+
+**HTTP Request:**
+  * You should review the Server Side Programming slides from week 3 to review the format of simple HTTP requests.
+  * E.g. In Chrome, here is an HTTP request header of http://localhost:3000/test.html
 ```GET /test.html HTTP/1.1
 Host: localhost:3000
 Connection: keep-alive
@@ -85,20 +86,21 @@ Accept-Language: en-US,en;q=0.8
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 ```
 
- * A blank line delimits the end of the HTTP request
- * So your HTTP Server program must read the first line from the TCP socket, parse out the *resource identifier* (e.g. /test.html) and then try to read that file (e.g. test.html) from your local file system (see TEST HTML FILES below).
+  * A blank line delimits the end of the HTTP request
+  * So your HTTP Server program must read the first line from the TCP socket, parse out the *resource identifier* (e.g. /test.html) and then try to read that file (e.g. test.html) from your local file system (see TEST HTML FILES below).
 
-* **HTTP Response:**
-    * The minimal response header is simply ```HTTP/1.1 200 OK\n\n```.  The backslash-n indicates a new line. The extra new line means end of headers. A typical server will send additional headers, but you don't need to.
-    * After the response header and new line, you would follow with the content of the requested file.
-    * You only need to handle GET requests (not POST, etc.)
-    * Put a test html file in your IntelliJ project directory to make it easy to find.
-    * You are probably familiar with the Scanner class which can be helpful with this task. Otherwise you may prefer to use the FileReader class to open the file, and pass the FileReader to a BufferedReader to make the file easy to read a line at a time.
-    * Repeatedly read a line from the file and write it to the socket, until the whole file has been read and sent.
-    * Return the appropriate HTTP Status Code (404) if the file is not found.
-    * You will visit your simple HTTP server using a browser.<br>
-    (You do **not** develop an HTTP client.)
-    * A typical HTTP response header will have the content-length, or "transfer-encoding chunked". We are cheating and just closing the socket. This will indicate to the browser that the response has been completed.
+**HTTP Response:**
+
+* The minimal response header is simply ```HTTP/1.1 200 OK\n\n```.  The backslash-n indicates a new line. The extra new line means end of headers. A typical server will send additional headers, but you don't need to.
+* After the response header and new line, you would follow with the content of the requested file.
+* You only need to handle GET requests (not POST, etc.)
+* Put a test html file in your IntelliJ project directory to make it easy to find.
+* You are probably familiar with the Scanner class which can be helpful with this task. Otherwise you may prefer to use the FileReader class to open the file, and pass the FileReader to a BufferedReader to make the file easy to read a line at a time.
+* Repeatedly read a line from the file and write it to the socket, until the whole file has been read and sent.
+* Return the appropriate HTTP Status Code (404) if the file is not found.
+* You will visit your simple HTTP server using a browser.<br>
+(You do **not** develop an HTTP client.)
+* A typical HTTP response header will have the content-length, or "transfer-encoding chunked". We are cheating and just closing the socket. This will indicate to the browser that the response has been completed.
 
 **TEST HTML FILES:**
 * You must create your own test HTML file. It can be as simple or complex as you like. Use an existing html file if you have one.
@@ -109,5 +111,4 @@ Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 :checkered_flag: **Demonstrate your solution to a TA for credit.**
 * Show the project, code, and execution in IntelliJ
 * You should demonstrate 200 OK and 404 File Not Found
-* If you don't complete the lab by the end of class, you must show a TA during
-    their office hours before your next scheduled class on Monday or Tuesday.
+* If you don't complete the lab by the end of class, you must show a TA during their office hours before your next scheduled class on Monday or Tuesday.
