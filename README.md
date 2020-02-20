@@ -1,4 +1,5 @@
 # Lab 4 - HTTP Server Lab
+# Using IntelliJ
 
 This lab builds on the networking and HTTP lectures and videos and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
 
