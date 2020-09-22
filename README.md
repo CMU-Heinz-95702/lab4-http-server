@@ -14,7 +14,7 @@ For this lab you are to build your own web server. Just like Apache, IIS, or ngi
 
 You should start with the EchoServerTCP.java class, and change it to be able to handle simple HTTP GET requests for static html files.
 
-You should develop your HTTP Server in IntelliJ IDEA so that you can continue to get comfortable using the IDE. Note that you are not developing a Web Application; rather you are developing a simple Java desktop application. Explore how do create a simple Java desktop application in IntelliJ, and help those around you to figure it out also. (You are encouraged to help each other for Labs, but doing so is taboo for Projects.)
+You should develop your HTTP Server in IntelliJ IDEA so that you can continue to get comfortable using the IDE. Note that you are not developing a Web Application; rather you are developing a simple Java desktop application. Explore how do create a simple Java desktop application in IntelliJ, and help others in your Lab to figure it out also. (You are encouraged to help each other for Labs, but doing so is taboo for Projects.)
 
 Your Java application should be based on EchoServerTCP.java (i.e. begin by making a copy of that code), but should have a class name that makes sense for its role as a simple web server.
 
@@ -112,4 +112,4 @@ Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 :checkered_flag: **Demonstrate your solution to a TA for credit.**
 * Show the project, code, and execution in IntelliJ
 * You should demonstrate 200 OK and 404 File Not Found
-* If you don't complete the lab by the end of class, you must show a TA during their office hours before your next scheduled class on Monday or Tuesday.
+* If you don't complete the lab by the end of class, you must show a TA during their office hours before your next scheduled class on Monday.
