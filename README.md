@@ -8,7 +8,7 @@ You should first view the [13 minute video](http://heinzcollege.mediasite.com/Me
 
 :warning: **If you have reached this point, and you have not watched [the video](http://heinzcollege.mediasite.com/Mediasite/Play/21d1939d54f04444b042e45fc923742e1d), go back.**
 
-Example client and server socket implementations in several languages can be found in the Example-Socket-Code directory. You can clone or download this whole repository, or just download the raw version of EchoServerTCP.java.
+This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. You can clone or download this whole repository, or just download the raw version of EchoServerTCP.java.
 
 For this lab you are to build your own web server. Just like Apache, IIS, or nginx, you are to build a web server that can take HTTP requests from a browser and return static HTML files. (Of course, your server will be much simpler than Apache and the rest.)
 
@@ -46,7 +46,7 @@ writes the same data back to the socket. This is not the HTTP protocol, and the 
 Your task in this lab is to understand EchoServerTCP.java, and then use it to
 help you develop a web server.
 
-**_Code is poetry_**. Read and work to understand each line of EchoServerTCP.java as if you were learning and understanding a poem. Discuss each line with those around you so that you together fully understand the code. If you first understand the EchoServerTCP.java poem, it will be much easier to build the web server.
+**_Code is poetry_**. Read and work to understand each line of EchoServerTCP.java as if you were learning and understanding a poem. Discuss each line with others in your lab so that together you fully understand the code. If you first understand the EchoServerTCP.java poem, it will be much easier to build the web server.
 
 Your HTTP server should be able to handle multiple requests, one-at-a-time. You do **not** have to handle multiple simultaneous requests, so your solution can be single-threaded. (I.e. you do not have to use threads.)
 
@@ -74,7 +74,7 @@ Your HTTP server should be able to handle multiple requests, one-at-a-time. You 
 **HINTS:**
 
 **HTTP Request:**
-  * You should review the Server Side Programming slides from week 3 to review the format of simple HTTP requests.
+  * You should review the Server Side Programming slides to review the format of simple HTTP requests.
   * E.g. In Chrome, here is an HTTP request header of http://localhost:3000/test.html
 ```GET /test.html HTTP/1.1
 Host: localhost:3000
@@ -112,4 +112,4 @@ Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 :checkered_flag: **Demonstrate your solution to a TA for credit.**
 * Show the project, code, and execution in IntelliJ
 * You should demonstrate 200 OK and 404 File Not Found
-* If you don't complete the lab by the end of class, you must show a TA during their office hours before your next scheduled class on Monday.
+* If you don't complete the lab by the end of class, you must show a TA during their office hours before 1:30pm EST on Monday.
