@@ -57,8 +57,7 @@ Your HTTP server should be able to handle multiple requests, one-at-a-time. You 
   * accept a socket connection
   * read the first line of the HTTP request
   * parse out the file path requested<br>
-   :checkered_flag: **(CHECKPOINT: print the file path to the console.)**
-  * read but discard the rest of the request headers so that the next line available to read will be the next HTTP request, not the remainder of the prior header
+  * read but discard the rest of the request headers, including the blank line, so that the next line available to read will be the next HTTP request, not the remainder of the prior header
   * try to open the file requested on your local disk
   * if successful
     * reply with OK status response header
@@ -109,7 +108,4 @@ Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 **Extra challenge (not required):**
 * Return ```405 Method Not Allowed``` if you receive an HTTP method you don't handle
 
-:checkered_flag: **Demonstrate your solution to a TA for credit.**
-* Show the project, code, and execution in IntelliJ
-* You should demonstrate 200 OK and 404 File Not Found
-* If you don't complete the lab by the end of class, you must show a TA during their office hours before 1:30pm EST on Monday.
+Be sure to complete **and understand** the lab, because there will be questions regarding it on the midterm and/or final.
