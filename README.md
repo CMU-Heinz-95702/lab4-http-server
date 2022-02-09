@@ -12,9 +12,9 @@ This repository's Example-Socket-Code directory has example client and server so
 
 For this lab you are to build your own web server. Just like Apache, IIS, or nginx, you are to build a web server that can take HTTP requests from a browser and return static HTML files. (Of course, your server will be much simpler than Apache and the rest.)
 
-You should start with the EchoServerTCP.java class, and change it to be able to handle simple HTTP GET requests for static html files.
+You will start with the EchoServerTCP.java class, and change it to be able to handle simple HTTP GET requests for static html files.
 
-You should develop your HTTP Server in IntelliJ IDEA so that you can continue to get comfortable using the IDE. Note that you are not developing a Web Application; rather you are developing a simple Java desktop application. Explore how do create a simple Java desktop application in IntelliJ, and help others in your Lab to figure it out also. (You are encouraged to help each other for Labs, but doing so is taboo for Projects.)
+You will develop your HTTP Server in IntelliJ IDEA so that you can continue to get comfortable using the IDE. Note that you are not developing a Web Application; rather you are developing a simple Java desktop application. Explore how do create a simple Java desktop application in IntelliJ, and help others in your Lab to figure it out also. (You are encouraged to help each other for Labs, but doing so is taboo for Projects.)
 
 Your Java application should be based on EchoServerTCP.java (i.e. begin by making a copy of that code), but should have a class name that makes sense for its role as a simple web server.
 
@@ -57,6 +57,7 @@ Your HTTP server should be able to handle multiple requests, one-at-a-time. You 
   * accept a socket connection
   * read the first line of the HTTP request
   * parse out the file path requested<br>
+  * :checkered_flag: **(CHECKPOINT: print the file path to the console.)**
   * read but discard the rest of the request headers, including the blank line, so that the next line available to read will be the next HTTP request, not the remainder of the prior header
   * try to open the file requested on your local disk
   * if successful
@@ -107,5 +108,10 @@ Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 
 **Extra challenge (not required):**
 * Return ```405 Method Not Allowed``` if you receive an HTTP method you don't handle
+
+:checkered_flag: **LAB COMPLETION: Demonstrate your solution to a TA for credit.**
+* Show the project, code, and execution in IntelliJ
+* You should demonstrate 200 OK and 404 File Not Found
+* If you don't complete the lab by the end of class, you must show a TA during their office hours before 1:25pm EST on Monday.
 
 Be sure to complete **and understand** the lab, because there will be questions regarding it on the midterm and/or final.
