@@ -75,7 +75,8 @@ Your HTTP server should be able to handle multiple requests, one-at-a-time. You 
 **HTTP Request:**
   * You should review the Server Side Programming slides to review the format of simple HTTP requests.
   * E.g. In Chrome, here is an HTTP request header of http://localhost:3000/test.html
-```GET /test.html HTTP/1.1
+```
+GET /test.html HTTP/1.1
 Host: localhost:3000
 Connection: keep-alive
 Cache-Control: max-age=0
