@@ -112,6 +112,6 @@ Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 :checkered_flag: **LAB COMPLETION: Demonstrate your solution to a TA for credit.**
 * Show the project, code, and execution in IntelliJ
 * You should demonstrate 200 OK and 404 File Not Found
-* If you don't complete the lab by the end of class, you must show a TA during their office hours before 1:25pm EST on Monday.
+* If you don't complete the lab by the end of class, you must show a TA during their office hours before 2:00pm EST on Monday.
 
 Be sure to complete **and understand** the lab, because there will be questions regarding it on the midterm and/or final.
