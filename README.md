@@ -18,7 +18,7 @@ You will develop your HTTP Server in IntelliJ IDEA so that you can continue to g
 
 Your Java application should be based on EchoServerTCP.java (i.e. begin by making a copy of that code), but should have a class name that makes sense for its role as a simple web server.
 
-You will also have to figure out how to create a Run Configuration for a Java desktop app. You run it as you would any Java application. It does not use TomEE.
+To create a simple, stand alone application in IntelliJ Ultimate, open IntelliJ and select Project/New Project/New Project and then provide a name for a Java class. Right click the project name and select new Java class.
 
 You will make requests to your simple HTTP server using a browser. You do not need to develop an HTTP client.
 
