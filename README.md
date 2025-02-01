@@ -7,7 +7,7 @@ This lab builds on the networking and HTTP lectures and gives you experience wor
 
 In other words, we are making HTTP requests over a TCP socket.
 
-This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. Feel free to browse these to see how socket connections can be made in several languages. We are not using any of the code found in Example-Socket-Code for this lab.
+This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. It is essential that you browse these to see how socket connections can be made in several languages. We are not using any of the code found in Example-Socket-Code for this lab.
 
 The starter code that we will use is named StartingWebServer.java and is shown next:
 
