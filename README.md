@@ -1,7 +1,7 @@
 # Lab 4 - HTTP Server Lab
 # Using IntelliJ
 
-At the end of this lab, you should have an HTTP server that is able to serve up two different files to a browser. This lab should work across browsers such as FireFox and Chrome.
+At the end of this lab, you should have an HTTP server that is able to serve up two different files to a browser. This lab should work across browsers such as FireFox and Chrome. In addition, you need to also complete the quiz on Canvas named Lab4_Quiz.
 
 This lab builds on the networking and HTTP lectures and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
 
