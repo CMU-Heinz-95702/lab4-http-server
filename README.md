@@ -1,80 +1,192 @@
 # Lab 4 - HTTP Server Lab
 # Using IntelliJ
 
-This lab builds on the networking and HTTP lectures and videos and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
+At the end of this lab, you should have an HTTP server that is able to serve up two different files to a browser. This lab should work across browsers such as FireFox and Chrome.
 
-You should first view the [13 minute video](http://heinzcollege.mediasite.com/Mediasite/Play/21d1939d54f04444b042e45fc923742e1d)
- that explains TCP and UDP sockets and introduces the task for this lab.
+This lab builds on the networking and HTTP lectures and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
 
-:warning: **If you have reached this point, and you have not watched [the video](http://heinzcollege.mediasite.com/Mediasite/Play/21d1939d54f04444b042e45fc923742e1d), go back.**
+In other words, we are making HTTP requests over a TCP socket.
 
-This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. You can clone or download this whole repository, or just download the raw version of EchoServerTCP.java.
+This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. Feel free to browse these to see how socket connections can be made in several languages. We are not using any of the code found in Example-Socket-Code for this lab.
 
-For this lab you are to build your own web server. Just like Apache, IIS, or nginx, you are to build a web server that can take HTTP requests from a browser and return static HTML files. (Of course, your server will be much simpler than Apache and the rest.)
+The starter code that we will use is named StartingWebServer.java and is shown next:
 
-You will start with the EchoServerTCP.java class, and change it to be able to handle simple HTTP GET requests for static html files.
+```
+// Lab 4 - HTTP Server Lab
+// We will be making the necessary modifications to this code so that it is able
+// to respond to two requests from a browser.
+// One request will be for http://localhost:7777/index.html and another request
+// will be for http://localhost:7777/test.html.
+// This server will also work if the user enters a request for a file that is not available.
 
-You will develop your HTTP Server in IntelliJ IDEA so that you can continue to get comfortable using the IDE. Note that you are not developing a Web Application; rather you are developing a simple Java desktop application. Explore how do create a simple Java desktop application in IntelliJ, and help others in your Lab to figure it out also. (You are encouraged to help each other for Labs, but doing so is taboo for Projects.)
 
-Your Java application should be based on EchoServerTCP.java (i.e. begin by making a copy of that code), but should have a class name that makes sense for its role as a simple web server.
+import java.net.*;
+import java.io.*;
 
-To create a simple, stand alone application in IntelliJ Ultimate, open IntelliJ and select Project/New Project/New Project and then provide a name for a Java class. Right click the project name and select new Java class.
+// StartingWebServer is a web server that needs to be modified
+// for the HTTP Server Lab.
 
-You will make requests to your simple HTTP server using a browser. You do not need to develop an HTTP client.
+public class StartingWebServer {
 
-**So to review so far:**
-* The web browser (e.g. Chrome) will be your client.
-* You are to create a web server, using EchoServerTCP.java as a starting point
+    public static void main(String args[]) {
+        Socket clientSocket = null;
+        try {
+            int serverPort = 7777; // the port that this server will listen on
 
-EchoServerTCP.java is not currently a web server. It is a silly application
-that just echoes back to the sender whatever it received.
+            // Create a new server socket on the port
+            ServerSocket listenSocket = new ServerSocket(serverPort);
 
-**Like a web server, EchoServerTCP.java can:**
-* Open a TCP socket from a client
-* Read data arriving on the socket
-* Write data to the socket
+            // Handle mulitple visits
+            while (true) {
 
-But unlike a web server, when EchoServerTCP.java reads from the socket, it
-writes the same data back to the socket. This is not the HTTP protocol, and the browser will be confused when it receives _back_ an HTTP request instead of receiving an expected HTTP response.
+                // block and wait for a visit
+                clientSocket = listenSocket.accept();
 
-**What a web server does but EchoServerTCP.java does NOT currently do is:**
-* Parse the data being read and interpret it as an HTTP request
-* Write a valid HTTP response header to the socket
-* Read the file the HTTP request asked for from local disk
-* Write the file data the HTTP request asked for to the socket
+                // display on the server console
+                System.out.println("We have a visit");
 
-Your task in this lab is to understand EchoServerTCP.java, and then use it to
-help you develop a web server.
+                // Set up "inFromSocket" to read from the client socket
+                BufferedReader inFromSocket = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-**_Code is poetry_**. Read and work to understand each line of EchoServerTCP.java as if you were learning and understanding a poem. Discuss each line with others in your lab so that together you fully understand the code. If you first understand the EchoServerTCP.java poem, it will be much easier to build the web server.
+                // Set up "out" to write to the client socket
+                PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())));
 
-Your HTTP server should be able to handle multiple requests, one-at-a-time. You do **not** have to handle multiple simultaneous requests, so your solution can be single-threaded. (I.e. you do not have to use threads.)
+                // read a line of HTTP from the TCP socket
+                String data = inFromSocket.readLine();
 
-**In general terms, your simple HTTP server should:**
+                // Do we have a GET request
+                if (data != null && data.startsWith("GET")) {
 
-* Create a socket
-* Loop forever...
-  * accept a socket connection
-  * read the first line of the HTTP request
-  * parse out the file path requested<br>
-  * :checkered_flag: **(CHECKPOINT: print the file path to the console.)**
-  * try to open the file requested on your local disk
-  * if successful
-    * reply with OK status response header
-    * reply with blank line to indicate end of headers
-    * while more lines of the file remain...
-      * read a line of the file
-      * write to the socket
-  * else
-     * report file not found using the correct HTTP status code
-  * flush the socket
-  * close the socket
+                    // extract file name from the request
+                    String[] tokens = data.split(" ");
+                    String requestedFile = tokens[1].substring(1);
 
-**HINTS:**
+                    // Now requestedFile contains the file name
+                    System.out.println("The file is " + requestedFile);
+                    BufferedReader fileIn = null;
+                    try {
+                        // open the file
+                        File file = new File(requestedFile);
+                        fileIn = new BufferedReader(new FileReader(file));
 
-**HTTP Request:**
-  * You should review the Server Side Programming slides to review the format of simple HTTP requests.
-  * E.g. In Chrome, here is an HTTP request header of http://localhost:3000/test.html
+                        System.out.println("We need to send back response headers now.");
+
+                        System.out.println("We need to send back file data now.");
+
+                        // The next 7 lines are just for startup. Remove
+                        // these lines 7 when the lab is complete.
+                        System.out.println("This program is not yet complete, so send back an HTTP 404 error.");
+                        System.out.println("No such file");
+                        out.println("HTTP/1.1 404 Not Found");
+                        out.println("Content-Type: text/html");
+                        out.println("Connection: close");
+                        out.println();
+                        out.println("<html><body><h1>File Not Found</h1></body></html>");
+
+                    } catch (FileNotFoundException e) {
+
+                        System.out.println("No such file");
+                        out.println("HTTP/1.1 404 Not Found");
+                        out.println("Content-Type: text/html");
+                        out.println("Connection: close");
+                        out.println();
+                        out.println("<html><body><h1>File Not Found</h1></body></html>");
+                    } finally {
+                        if (fileIn != null) {
+                            fileIn.close();
+                        }
+                    }
+                }
+                System.out.println("Closing ");
+                out.flush();
+                out.close();
+                clientSocket.close();
+            }
+        } catch (IOException e) {
+            System.out.println("IO Exception:" + e.getMessage());
+        } finally {
+            try {
+                if (clientSocket != null) {
+                    clientSocket.close();
+                }
+            } catch (IOException e) {
+                System.out.println("IOException ");
+            }
+        }
+    }
+}
+
+```
+StartingWebServer.java makes no use of JEE or Tomcat. It is a stand alone web server. To create a simple, stand alone Java application in IntelliJ Ultimate, open IntelliJ and select Project/New Project/New Project and then provide a name for a Java class. Right click the project name and select new Java class.
+
+Copy and paste (the unmodified) StartingWebServer.java into IntelliJ and run it. Visit it with a browser by visiting http://localhost:7777/index.html.
+
+:checkered_flag: **Exercise 1. Answer Question 1 in Lab4_Quiz.**
+
+For this lab, you will make the necessary modifications to StartingWebServer.java so that it serves up two files: index.html and test.html.
+
+index.html file is shown here:
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Tutorial</title>
+</head>
+<body>
+
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html>
+```
+
+The file test.html is shown next:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Color Changer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to the Color Changer!</h1>
+<p>Click the button below to change the background color.</p>
+<button onclick="changeColor()">Change Color</button>
+
+<script>
+    function changeColor() {
+        const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        document.body.style.backgroundColor = randomColor;
+    }
+</script>
+</body>
+</html>
+```
+To include these two files in your IntelliJ project, right click the project node and choose "new file". Save each file, in this way.
+
+In this lab, the web browser (e.g. Chrome) will be your HTTP client.
+
+Spend some time studying StartingWebServer.java. With this understanding, it will be much easier to build the web server.
+
+This server handles one request at a time. It is not a multi-threaded server that is able to handle simultaneous visits. In this lab, we will be keeping things simple and will not be using threads.
+
+In Chrome, here is an HTTP request generated by a visit to http://localhost:3000/test.html
+
 ```
 GET /test.html HTTP/1.1
 Host: localhost:3000
@@ -86,32 +198,63 @@ Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 ```
+As you can see, the browser provides the HTTP request broken into many components. Here, the browser is attempting to fetch a file named test.html.
+The other components are important for a sophisticated web server, such as Apache or Tomcat. In this lab, we are only interested in the first line.
 
-  * A blank line delimits the end of the HTTP request
-  * So your HTTP Server program must read the first line from the TCP socket, parse out the *resource identifier* (e.g. /test.html) and then try to read that file (e.g. test.html) from your local file system (see TEST HTML FILES below).
+HTTP is primarily based upon four verbs: GET, PUT, POST and DELETE. In this lab, we are only handling GET request. Note how this is detected in StartingWebServer.java.
 
-**HTTP Response:**
+:checkered_flag: **Exercise 2. Answer Question 2 in Lab4_Quiz.**
 
-* The minimal response header is simply ```HTTP/1.1 200 OK\n\n```.  The backslash-n indicates a new line. The extra new line means end of headers. A typical server will send additional headers, but you don't need to.
-* After the response header and new line, you would follow with the content of the requested file.
-* You only need to handle GET requests (not POST, etc.)
-* Put a test html file in your IntelliJ project directory to make it easy to find.
-* You are probably familiar with the Scanner class which can be helpful with this task. Otherwise you may prefer to use the FileReader class to open the file, and pass the FileReader to a BufferedReader to make the file easy to read a line at a time.
-* Repeatedly read a line from the file and write it to the socket, until the whole file has been read and sent.
-* Return the appropriate HTTP Status Code (404) if the file is not found.
-* You will visit your simple HTTP server using a browser.<br>
-(You do **not** develop an HTTP client.)
-* A typical HTTP response header will have the content-length, or "transfer-encoding chunked". We are cheating and just closing the socket. This will indicate to the browser that the response has been completed.
+The next step in this lab is to replace this line of code with actual
+code that will do the job.
 
-**TEST HTML FILES:**
-* You must create your own test HTML file. It can be as simple or complex as you like. Use an existing html file if you have one.
+```
+System.out.println("We need to send back response headers now.");
 
-**Extra challenge (not required):**
-* Return ```405 Method Not Allowed``` if you receive an HTTP method you don't handle
+```
+Next, be sure to remove the code that is only necessary for the initial set up. See the code and read the comments.
 
-:checkered_flag: **LAB COMPLETION: Demonstrate your solution to a TA for credit.**
-* Show the project, code, and execution in IntelliJ
-* You should demonstrate 200 OK and 404 File Not Found
-* If you don't complete the lab by the end of class, you must show a TA during their office hours before 2:00pm EST on Monday.
+The HTTP response headers should include an HTTP code that signals
+that all went well, a content-type, and a connection status.
 
-Be sure to complete **and understand** the lab, because there will be questions regarding it on the midterm and/or final.
+:checkered_flag: **Exercise 3. Answer Question 3 in Lab4_Quiz.**
+
+Next, you will need to replace this line of code with code that will do the job.
+
+```
+System.out.println("We need to send back file data now.");
+
+```
+:checkered_flag: **Exercise 4. Answer Question 4 in Lab4_Quiz.**
+
+StaringWebServer is working with socket level code.
+
+When working with socket level code, we need to be aware of the following abstractions.
+These abstractions are implemented in various languages. For the upcoming exam, you need to be familiar with how these abstractions map on to code.
+
+* Create: Both the client and the server create a socket.
+* Bind: The server, but not the client, binds a socket to a local IP address and port.
+* Listen: The server, but not the client, listens on a socket.
+* Connect: The client, but not the server, assigns a local port and connects to a remote port.
+* Accept: The server, but not the client, accepts a connection on a listened to socket.
+* Read, Write: Both the client and the server are able to read and write data to and from the socket.
+* Close: Both the client and the server close the socket to terminate communication.
+
+Here are some notes (required reading) on HTTP responses.
+
+The minimal response header is simply ```HTTP/1.1 200 OK\n\n```.  The backslash-n indicates a new line. The extra new line means end of headers. A typical server will send additional headers, but you don't need to in this lab.
+
+After the response header and new line, you would follow with the content of the requested file.
+
+In this lab, you only need to handle GET requests (not POST, etc.)
+
+The two html FILES are placed in your IntelliJ project directory to make them easy to find. Other locations will also work.
+
+Return the appropriate HTTP Status Code, (404) if the file is not found, (200) if things went well.
+
+You will visit your simple HTTP server using a browser as the HTTP client.<br>
+(You are **not** developing an HTTP client.)
+
+A typical HTTP response header will have the content-length, or "transfer-encoding chunked". We are cheating and just closing the socket. This will indicate to the browser that the response has been completed.
+
+:checkered_flag: **Exercise 5. Answer Question 5 in Lab4_Quiz.**
