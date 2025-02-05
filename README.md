@@ -5,11 +5,11 @@ At the end of this lab, you should have an HTTP server that is able to serve up 
 
 This lab builds on the networking and HTTP lectures and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
 
-In other words, we are making HTTP requests over a TCP socket.
+In other words, we are writing HTTP requests and HTTP responses over a TCP socket. Recall how this works: A browser sends an HTTP request over a TCP socket. TCP, in turn, sends messages to the IP layer. The IP layer communicates with the underlying network.
 
-This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. It is essential that you browse these to see how socket connections can be made in several languages. We are not using any of the code found in Example-Socket-Code for this lab.
+This repository's Example-Socket-Code directory has example client and server socket implementations in several languages. You should browse these files to see how socket connections can be made in several languages. We are not using any of the code found in Example-Socket-Code for this lab.
 
-The starter code that we will use is named StartingWebServer.java and is shown next:
+The starter code that we will use is named StartingWebServer.java and is shown next. Please be sure to read over this code and make sense of it before using it.
 
 ```
 // Lab 4 - HTTP Server Lab
