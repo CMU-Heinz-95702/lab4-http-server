@@ -1,7 +1,7 @@
 # Lab 4 - HTTP Server Lab
 # Using IntelliJ
 
-At the end of this lab, you should have an HTTP server that is able to serve up two different files to a browser. This lab should work across browsers such as FireFox and Chrome. In addition, you need to also complete the quiz on Canvas named Lab4_Quiz.
+At the end of this lab, you should have an HTTP server that is able to serve up two different files to a browser. This lab should work across browsers such as FireFox and Chrome.
 
 This lab builds on the networking and HTTP lectures and gives you experience working with a transport layer protocol (TCP) and implementing basic elements of an application layer protocol (HTTP).
 
@@ -121,7 +121,7 @@ StartingWebServer.java makes no use of JEE or Tomcat. It is a stand alone web se
 
 Copy and paste (the unmodified) StartingWebServer.java into IntelliJ and run it. Visit it with a browser by visiting http://localhost:7777/index.html.
 
-:checkered_flag: **Exercise 1. Answer Question 1 in Lab4_Quiz.**
+:checkered_flag: This is the .25 point checkpoint. Show your TA that you have a working program (in IntelliJ) and a browser.
 
 For this lab, you will make the necessary modifications to StartingWebServer.java so that it serves up two files: index.html and test.html.
 
@@ -203,8 +203,6 @@ The other components are important for a sophisticated web server, such as Apach
 
 HTTP is primarily based upon four verbs: GET, PUT, POST and DELETE. In this lab, we are only handling GET request. Note how this is detected in StartingWebServer.java.
 
-:checkered_flag: **Exercise 2. Answer Question 2 in Lab4_Quiz.**
-
 The next step in this lab is to replace this line of code with actual
 code that will do the job.
 
@@ -217,7 +215,6 @@ Next, be sure to remove the code that is only necessary for the initial set up. 
 The HTTP response headers should include an HTTP code that signals
 that all went well, a content-type, and a connection status.
 
-:checkered_flag: **Exercise 3. Answer Question 3 in Lab4_Quiz.**
 
 Next, you will need to replace this line of code with code that will do the job.
 
@@ -225,9 +222,6 @@ Next, you will need to replace this line of code with code that will do the job.
 System.out.println("We need to send back file data now.");
 
 ```
-:checkered_flag: **Exercise 4. Answer Question 4 in Lab4_Quiz.**
-
-StaringWebServer is working with socket level code.
 
 When working with socket level code, we need to be aware of the following abstractions.
 These abstractions are implemented in various languages. For the upcoming exam, you need to be familiar with how these abstractions map on to code.
@@ -257,4 +251,4 @@ You will visit your simple HTTP server using a browser as the HTTP client.<br>
 
 A typical HTTP response header will have the content-length, or "transfer-encoding chunked". We are cheating and just closing the socket. This will indicate to the browser that the response has been completed.
 
-:checkered_flag: **Exercise 5. Answer Question 5 in Lab4_Quiz.**
+:checkered_flag: This is the .75 point checkpoint. Show a TA that you have a working server that interacts with a client (browser).
