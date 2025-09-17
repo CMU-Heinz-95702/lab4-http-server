@@ -121,8 +121,6 @@ StartingWebServer.java makes no use of JEE or Tomcat. It is a stand alone web se
 
 Copy and paste (the unmodified) StartingWebServer.java into IntelliJ and run it. Visit it with a browser by visiting http://localhost:7777/index.html.
 
-:checkered_flag: This is the .25 point checkpoint. Show your TA that you have a working program (in IntelliJ) and a browser.
-
 For this lab, you will make the necessary modifications to StartingWebServer.java so that it serves up two files: index.html and test.html.
 
 index.html file is shown here:
@@ -141,6 +139,7 @@ index.html file is shown here:
 </body>
 </html>
 ```
+:checkered_flag: This is the .25 point checkpoint. Show your TA that you have a working program (in IntelliJ) and a browser.
 
 The file test.html is shown next:
 ```
