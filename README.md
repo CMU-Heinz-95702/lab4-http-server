@@ -74,7 +74,7 @@ public class StartingWebServer {
                         System.out.println("We need to send back file data now.");
 
                         // The next 7 lines are just for startup. Remove
-                        // these lines 7 when the lab is complete.
+                        // these 7 lines when the lab is complete.
                         System.out.println("This program is not yet complete, so send back an HTTP 404 error.");
                         System.out.println("No such file");
                         out.println("HTTP/1.1 404 Not Found");
